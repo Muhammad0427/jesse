@@ -86,7 +86,7 @@ export default function HomePage() {
             Review — Day One.
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-300 leading-relaxed mb-10">
-            ClearPath UM ingests clinical documentation, extracts the key findings, and generates structured
+            MedReview24 ingests clinical documentation, extracts the key findings, and generates structured
             determination support for inpatient admissions, SNF placement, and LTAC requests — aligned with MCG and
             Milliman criteria frameworks.
           </p>
@@ -136,7 +136,7 @@ export default function HomePage() {
       {/* Features grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-800 text-center mb-4">The ClearPath UM Solution</h2>
+          <h2 className="text-3xl font-bold text-slate-800 text-center mb-4">The MedReview24 Solution</h2>
           <p className="text-center text-slate-500 max-w-xl mx-auto mb-14">
             One platform, two audiences, three care settings — purpose-built for concurrent UM review.
           </p>
@@ -191,7 +191,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-xs text-slate-400 leading-relaxed">
             <span className="text-amber-400 font-semibold">Clinical Decision Support Only:</span> All outputs require
-            independent review and final determination by a licensed clinical reviewer. ClearPath UM does not issue
+            independent review and final determination by a licensed clinical reviewer. MedReview24 does not issue
             coverage denials or replace licensed criteria products (MCG™, Milliman Care Guidelines®).
           </p>
         </div>

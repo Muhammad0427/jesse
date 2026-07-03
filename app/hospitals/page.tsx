@@ -48,7 +48,7 @@ export default function HospitalsPage() {
             Justify Inpatient Status <br className="hidden sm:block" />Same Day — Every Time
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-blue-100 leading-relaxed mb-8">
-            ClearPath UM gives your case management and UR team the clinical documentation analysis they need to defend
+            MedReview24 gives your case management and UR team the clinical documentation analysis they need to defend
             inpatient status, support SNF placement, and build LTAC criteria before the payor calls — not after.
           </p>
           <Link
@@ -83,7 +83,7 @@ export default function HospitalsPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-slate-800 text-center mb-4">Three Care Settings, One Platform</h2>
           <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">
-            Different levels of care require different criteria-relevant fields. ClearPath UM knows what to extract for each.
+            Different levels of care require different criteria-relevant fields. MedReview24 knows what to extract for each.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -116,7 +116,7 @@ export default function HospitalsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-slate-800 text-center mb-4">Day-One vs. Day-Two Reasoning</h2>
           <p className="text-center text-slate-500 mb-10 max-w-xl mx-auto">
-            ClearPath UM outputs are structured to support both the initial admission and continued stay determinations.
+            MedReview24 outputs are structured to support both the initial admission and continued stay determinations.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">

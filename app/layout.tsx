@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "ClearPath UM — Utilization Management Review Platform",
+  title: "MedReview24 — Utilization Management Review Platform",
   description:
     "Clinical decision support for inpatient, SNF, and LTAC utilization management review — built for hospital UR teams and insurance carrier UM departments.",
 };

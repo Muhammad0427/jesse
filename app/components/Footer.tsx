@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-3">
               <Shield className="text-blue-400" size={20} />
-              <span className="font-bold text-white text-lg">ClearPath UM</span>
+              <span className="font-bold text-white text-lg">MedReview24</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
               Clinical decision support for utilization management teams across hospital and payer organizations.
@@ -40,15 +40,15 @@ export default function Footer() {
             Clinical Decision Support Disclaimer
           </p>
           <p className="text-xs text-slate-400 leading-relaxed">
-            ClearPath UM is a clinical decision support tool only. All outputs — including admission support findings,
+            MedReview24 is a clinical decision support tool only. All outputs — including admission support findings,
             denial rationale, and criteria references — require independent review and final determination by a licensed
-            clinical reviewer. ClearPath UM does not make final coverage determinations, issue denials, or replace the
+            clinical reviewer. MedReview24 does not make final coverage determinations, issue denials, or replace the
             judgment of a qualified healthcare professional. MCG™ and Milliman Care Guidelines® are proprietary
-            evidence-based criteria products; ClearPath UM references these frameworks by name only and does not
+            evidence-based criteria products; MedReview24 references these frameworks by name only and does not
             reproduce, incorporate, or substitute for their licensed content.
           </p>
           <p className="text-xs text-slate-500 mt-4">
-            © {new Date().getFullYear()} ClearPath UM, Inc. All rights reserved.
+            © {new Date().getFullYear()} MedReview24, Inc. All rights reserved.
           </p>
         </div>
       </div>

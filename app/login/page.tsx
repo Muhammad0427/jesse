@@ -33,7 +33,7 @@ export default function LoginPage() {
         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
           <div className="bg-blue-700 px-8 py-7 text-center">
             <Shield className="mx-auto text-white mb-3" size={32} />
-            <h1 className="text-white font-bold text-xl">ClearPath UM</h1>
+            <h1 className="text-white font-bold text-xl">MedReview24</h1>
             <p className="text-blue-200 text-sm mt-1">Secure Clinical Platform</p>
           </div>
 

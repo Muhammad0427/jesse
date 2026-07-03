@@ -69,7 +69,7 @@ export default function CarriersPage() {
             Build Defensible Determinations.
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-300 leading-relaxed mb-8">
-            ClearPath UM helps carrier UM departments process inpatient, SNF, and LTAC authorization requests faster —
+            MedReview24 helps carrier UM departments process inpatient, SNF, and LTAC authorization requests faster —
             with structured clinical summaries, consistent criteria mapping, and denial-ready documentation.
           </p>
           <Link
@@ -84,7 +84,7 @@ export default function CarriersPage() {
       {/* Benefits grid */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-slate-800 text-center mb-4">What ClearPath UM Does for Your UM Team</h2>
+          <h2 className="text-2xl font-bold text-slate-800 text-center mb-4">What MedReview24 Does for Your UM Team</h2>
           <p className="text-center text-slate-500 mb-12 max-w-xl mx-auto">
             Designed to integrate with the workflows of UM nurses, medical directors, and UM operations teams.
           </p>
@@ -114,7 +114,7 @@ export default function CarriersPage() {
                     <p className="text-slate-600 leading-relaxed">{r.what}</p>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-1">ClearPath UM Output</span>
+                    <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-1">MedReview24 Output</span>
                     <p className="text-slate-600 leading-relaxed">{r.output}</p>
                   </div>
                   <div>
@@ -134,7 +134,7 @@ export default function CarriersPage() {
           <Scale className="mx-auto text-blue-700 mb-4" size={36} />
           <h2 className="text-2xl font-bold text-slate-800 mb-4">Built for Regulatory and Audit Environments</h2>
           <p className="text-slate-500 leading-relaxed max-w-2xl mx-auto mb-8">
-            All outputs are structured, citation-level, and tied to the clinical documentation submitted. ClearPath UM
+            All outputs are structured, citation-level, and tied to the clinical documentation submitted. MedReview24
             does not issue determinations — it supports the licensed clinical reviewer who does, maintaining clear
             accountability for the final decision.
           </p>
@@ -167,7 +167,7 @@ export default function CarriersPage() {
             Contact Us
           </Link>
           <Link href="/about" className="px-6 py-3 bg-white/10 border border-white/20 text-white font-bold rounded-lg hover:bg-white/20 transition-colors">
-            About ClearPath UM
+            About MedReview24
           </Link>
         </div>
       </section>

@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2">
             <Shield className="text-blue-700" size={24} />
-            <span className="font-bold text-slate-800 text-lg tracking-tight">ClearPath UM</span>
+            <span className="font-bold text-slate-800 text-lg tracking-tight">MedReview24</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-6">

@@ -4,7 +4,7 @@ const values = [
   {
     icon: Award,
     title: "RN & CCM-Led Clinical Design",
-    body: "ClearPath UM was designed by registered nurses with Case Management Certification (CCM) and direct experience in hospital UR and carrier UM operations. The criteria logic reflects real-world clinical review, not algorithmic guesswork.",
+    body: "MedReview24 was designed by registered nurses with Case Management Certification (CCM) and direct experience in hospital UR and carrier UM operations. The criteria logic reflects real-world clinical review, not algorithmic guesswork.",
   },
   {
     icon: BookOpen,
@@ -27,12 +27,12 @@ const frameworks = [
   {
     name: "MCG™ (Milliman Care Guidelines)",
     description:
-      "Evidence-based clinical criteria for inpatient admission, continued stay, SNF placement, and LTAC. ClearPath UM references MCG pathways in determination support outputs and reviewer checklists. MCG criteria are licensed separately and must be confirmed by the reviewing clinician.",
+      "Evidence-based clinical criteria for inpatient admission, continued stay, SNF placement, and LTAC. MedReview24 references MCG pathways in determination support outputs and reviewer checklists. MCG criteria are licensed separately and must be confirmed by the reviewing clinician.",
   },
   {
     name: "Milliman Care Guidelines® (MCG Health)",
     description:
-      "Widely used by payer UM departments for inpatient, SNF, LTAC, and outpatient clinical review. ClearPath UM references Milliman criteria names and pathway labels in outputs to help reviewers map clinical findings to the criteria framework they are already using.",
+      "Widely used by payer UM departments for inpatient, SNF, LTAC, and outpatient clinical review. MedReview24 references Milliman criteria names and pathway labels in outputs to help reviewers map clinical findings to the criteria framework they are already using.",
   },
 ];
 
@@ -43,9 +43,9 @@ export default function AboutPage() {
       <section className="bg-slate-800 py-20 text-white text-center">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Shield className="mx-auto text-blue-400 mb-4" size={40} />
-          <h1 className="text-4xl font-bold mb-5">About ClearPath UM</h1>
+          <h1 className="text-4xl font-bold mb-5">About MedReview24</h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            ClearPath UM is a clinical decision support platform built to make utilization management review faster,
+            MedReview24 is a clinical decision support platform built to make utilization management review faster,
             more consistent, and more defensible — for both hospital and payer UM teams.
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function AboutPage() {
               dependent on individual reviewer skill.
             </p>
             <p>
-              ClearPath UM exists to change that. We built a platform that ingests the clinical documentation that already
+              MedReview24 exists to change that. We built a platform that ingests the clinical documentation that already
               exists in the record, extracts the criteria-relevant findings that reviewers need, and presents them in a
               structured format that supports a faster, more consistent determination — whether you are the hospital defending
               an admission or the carrier reviewing the request.
@@ -97,7 +97,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-slate-800 text-center mb-4">Criteria Framework Alignment</h2>
           <div className="bg-amber-50 border border-amber-200 rounded-lg px-5 py-4 mb-8 text-sm text-amber-800">
-            <strong>Important:</strong> ClearPath UM references MCG and Milliman criteria frameworks by name to help
+            <strong>Important:</strong> MedReview24 references MCG and Milliman criteria frameworks by name to help
             reviewers cross-reference findings. We do not reproduce, license, redistribute, or claim to replicate
             their proprietary clinical criteria content. Users must have independent access to applicable criteria
             products to make final determinations.

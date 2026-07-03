@@ -39,7 +39,7 @@ export default function ContactPage() {
     <>
       <section className="bg-slate-800 py-16 text-white text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-3">Contact ClearPath UM</h1>
+          <h1 className="text-3xl font-bold mb-3">Contact MedReview24</h1>
           <p className="text-slate-300">
             Request a demo, ask about platform access, or reach out with questions about our clinical UM review platform.
           </p>
