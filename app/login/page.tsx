@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Shield, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { DEMO_USERS, saveSession } from "@/lib/auth";
+import { loginWithApi } from "@/lib/auth";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -17,17 +17,13 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 600));
-
-    const match = DEMO_USERS[email.toLowerCase()];
-    if (!match || match.password !== password) {
-      setError("Invalid email or password. Please try again.");
+    try {
+      await loginWithApi(email.toLowerCase(), password);
+      router.push("/dashboard");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Login failed. Please try again.");
       setLoading(false);
-      return;
     }
-
-    saveSession(match.user);
-    router.push("/dashboard");
   };
 
   return (
