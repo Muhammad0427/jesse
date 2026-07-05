@@ -86,9 +86,7 @@ export default function HomePage() {
             Review — Day One.
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-300 leading-relaxed mb-10">
-            MedReview24 ingests clinical documentation, extracts the key findings, and generates structured
-            determination support for inpatient admissions, SNF placement, and LTAC requests — aligned with MCG and
-            Milliman criteria frameworks.
+            MedReview24 reads the chart, extracts what matters, and delivers instant structured determination support for inpatient, SNF, and LTAC reviews — so your team spends less time on documentation and more time on decisions. Built around MCG and Milliman criteria frameworks.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
