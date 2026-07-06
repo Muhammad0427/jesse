@@ -8,30 +8,35 @@ export interface AuthUser {
   organization: string;
 }
 
-export const API_BASE = "https://jesse-production-bd77.up.railway.app";
 export const SESSION_KEY = "um_platform_user";
 export const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 
+const DEMO_USERS: Record<string, { password: string; user: AuthUser }> = {
+  "hospital@demo.com": {
+    password: "demo1234",
+    user: { email: "hospital@demo.com", name: "Sarah Chen, RN CCM", role: "hospital", organization: "Metro General Hospital" },
+  },
+  "carrier@demo.com": {
+    password: "demo1234",
+    user: { email: "carrier@demo.com", name: "James Park, MD", role: "carrier", organization: "BlueCross UM Division" },
+  },
+};
+
 export async function loginWithApi(email: string, password: string): Promise<AuthUser> {
-  const res = await fetch(`${API_BASE}/api/auth/login/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  if (!res.ok) {
+  await new Promise((r) => setTimeout(r, 600));
+  const match = DEMO_USERS[email.toLowerCase()];
+  if (!match || match.password !== password) {
     throw new Error("Invalid email or password. Please try again.");
   }
-  const data = await res.json();
-  const user: AuthUser = data.user;
-  saveSession(user, data.access, data.refresh);
-  return user;
+  saveSession(match.user);
+  return match.user;
 }
 
-export function saveSession(user: AuthUser, access?: string, refresh?: string) {
+export function saveSession(user: AuthUser) {
   if (typeof window === "undefined") return;
   sessionStorage.setItem(
     SESSION_KEY,
-    JSON.stringify({ user, access, refresh, expiresAt: Date.now() + SESSION_TIMEOUT_MS })
+    JSON.stringify({ user, expiresAt: Date.now() + SESSION_TIMEOUT_MS })
   );
 }
 
