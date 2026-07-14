@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadSession } from "@/lib/auth";
+import { loadSession, clearSession, getRemainingMs } from "@/lib/auth";
 import { PhiField } from "@/app/components/PhiField";
 import {
-  Upload, Sparkles, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronUp, Info, Loader2
+  Upload, Sparkles, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronUp, Info, Loader2, Download
 } from "lucide-react";
 
 type ReviewType = "inpatient" | "snf" | "ltac";
@@ -217,6 +217,9 @@ export default function ReviewPage() {
   useEffect(() => {
     if (!loadSession()) { router.push("/login"); return; }
     setAuthorized(true);
+    const remaining = getRemainingMs();
+    const t = setTimeout(() => { clearSession(); router.push("/login"); }, remaining);
+    return () => clearTimeout(t);
   }, [router]);
 
   if (!authorized) return null;
@@ -341,6 +344,59 @@ export default function ReviewPage() {
 
           {result && (
             <>
+              {/* Download button */}
+              <button
+                onClick={() => {
+                  const lines = [
+                    "MEDREVIEW24 — UM DETERMINATION SUPPORT OUTPUT",
+                    "=".repeat(60),
+                    `Review Type: ${reviewType.toUpperCase()}`,
+                    `Generated: ${new Date().toLocaleString()}`,
+                    "",
+                    "PATIENT IDENTIFICATION (PHI)",
+                    "-".repeat(40),
+                    `Name: ${result.phi.name}`,
+                    `DOB: ${result.phi.dob}`,
+                    `MRN: ${result.phi.mrn}`,
+                    `Admitting Dx: ${result.phi.admittingDx}`,
+                    `Attending: ${result.phi.attendingProvider}`,
+                    `DOS: ${result.phi.dosStart} – ${result.phi.dosEnd}`,
+                    "",
+                    "CLINICAL SUMMARY",
+                    "-".repeat(40),
+                    result.clinicalSummary,
+                    "",
+                    "FINDINGS SUPPORTING ADMISSION/PLACEMENT",
+                    "-".repeat(40),
+                    ...result.supportsAdmission.map(f => `[${f.category}] ${f.finding}\n  ${f.clinicalFact}\n  → ${f.criteriaRef}`),
+                    "",
+                    "FINDINGS NOT MEETING CRITERIA",
+                    "-".repeat(40),
+                    ...result.doesNotMeetCriteria.map(f => `[${f.category}] ${f.finding}\n  ${f.clinicalFact}\n  → ${f.criteriaRef}`),
+                    "",
+                    "CRITERIA-SPECIFIC FIELDS",
+                    "-".repeat(40),
+                    ...Object.entries(result.typeSpecificFindings).map(([k, v]) => `${k}: ${v}`),
+                    "",
+                    "REVIEWER CHECKLIST",
+                    "-".repeat(40),
+                    ...result.criteriaChecklist.map((item, i) => `[ ] ${item}`),
+                    "",
+                    "=".repeat(60),
+                    "CLINICAL DECISION SUPPORT ONLY — All findings must be independently confirmed by a licensed clinical reviewer. MedReview24 does not issue final coverage determinations.",
+                  ];
+                  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = `MedReview24_${reviewType}_${result.phi.mrn}_${new Date().toISOString().slice(0,10)}.txt`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                className="w-full py-2.5 border border-blue-300 text-blue-700 hover:bg-blue-50 font-semibold rounded-lg flex items-center justify-center gap-2 text-sm transition-colors"
+              >
+                <Download size={15} /> Download Review Output (.txt)
+              </button>
               {/* PHI fields */}
               <div className="bg-white rounded-xl border border-amber-200 shadow-sm overflow-hidden">
                 <div className="px-5 py-3 bg-amber-50 border-b border-amber-200 flex items-center gap-2">

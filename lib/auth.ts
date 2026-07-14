@@ -60,3 +60,15 @@ export function clearSession() {
   if (typeof window === "undefined") return;
   sessionStorage.removeItem(SESSION_KEY);
 }
+
+export function getRemainingMs(): number {
+  if (typeof window === "undefined") return 0;
+  const raw = sessionStorage.getItem(SESSION_KEY);
+  if (!raw) return 0;
+  try {
+    const { expiresAt } = JSON.parse(raw);
+    return Math.max(0, expiresAt - Date.now());
+  } catch {
+    return 0;
+  }
+}

@@ -16,6 +16,7 @@ export default function Navbar() {
   }, [pathname]);
 
   const handleLogout = () => {
+    if (!confirm("Are you sure you want to sign out?")) return;
     clearSession();
     router.push("/login");
   };
