@@ -224,14 +224,28 @@ export default function ReviewPage() {
 
   if (!authorized) return null;
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleAnalyze = async () => {
     if (!note.trim()) return;
     setLoading(true);
     setResult(null);
-    await new Promise((r) => setTimeout(r, 2200));
-    setResult(analyzeNote(note, reviewType));
-    setLoading(false);
-    setChecklistDone({});
+    setError(null);
+    try {
+      const res = await fetch("/.netlify/functions/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ note, reviewType }),
+      });
+      if (!res.ok) throw new Error("Analysis failed. Please try again.");
+      const data = await res.json();
+      setResult(data);
+      setChecklistDone({});
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Analysis failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const loadSample = () => setNote(SAMPLE_NOTE);
@@ -324,7 +338,14 @@ export default function ReviewPage() {
 
         {/* Results panel */}
         <div className="space-y-4">
-          {!result && !loading && (
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-5 flex items-start gap-3">
+              <XCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-700">{error}</p>
+            </div>
+          )}
+
+          {!result && !loading && !error && (
             <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl h-full flex items-center justify-center min-h-80">
               <div className="text-center text-slate-400">
                 <Sparkles size={32} className="mx-auto mb-3 opacity-40" />
