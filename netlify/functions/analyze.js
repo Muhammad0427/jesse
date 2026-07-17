@@ -1,4 +1,16 @@
 exports.handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      body: "",
+    };
+  }
+
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -16,6 +28,11 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Missing note or reviewType" }) };
   }
 
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return { statusCode: 500, body: JSON.stringify({ error: "API key not configured" }) };
+  }
+
   const typeFields = {
     inpatient: '"Day-One Reasoning": "...", "Day-Two Reasoning": "...", "Admitting Diagnosis": "...", "Criteria Framework": "..."',
     snf: '"Functional Status at Discharge": "...", "Skilled Need Identified": "...", "Prior Level of Function": "...", "Rehab Potential": "..."',
@@ -29,7 +46,7 @@ exports.handler = async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
@@ -48,7 +65,6 @@ exports.handler = async (event) => {
     const data = await res.json();
     const text = data.content[0].text.trim();
 
-    // Strip markdown code fences if Claude wraps in them
     const cleaned = text.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
     const result = JSON.parse(cleaned);
 
