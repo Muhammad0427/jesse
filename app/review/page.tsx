@@ -213,6 +213,7 @@ export default function ReviewPage() {
   const [result, setResult] = useState<ReviewResult | null>(null);
   const [checklistDone, setChecklistDone] = useState<Record<number, boolean>>({});
   const [showChecklist, setShowChecklist] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loadSession()) { router.push("/login"); return; }
@@ -223,8 +224,6 @@ export default function ReviewPage() {
   }, [router]);
 
   if (!authorized) return null;
-
-  const [error, setError] = useState<string | null>(null);
 
   const handleAnalyze = async () => {
     if (!note.trim()) return;
