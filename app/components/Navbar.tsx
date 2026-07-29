@@ -27,12 +27,14 @@ export default function Navbar() {
         { href: "/review", label: "New Review" },
         { href: "/hospitals", label: "Hospitals" },
         { href: "/carriers", label: "Carriers" },
+        { href: "/pricing", label: "Pricing" },
         { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
       ]
     : [
         { href: "/hospitals", label: "Hospitals" },
         { href: "/carriers", label: "Carriers" },
+        { href: "/pricing", label: "Pricing" },
         { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
       ];
