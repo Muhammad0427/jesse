@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadSession, clearSession, getRemainingMs } from "@/lib/auth";
+import { loadSession, clearSession, getRemainingMs, getToken } from "@/lib/auth";
 import { PhiField } from "@/app/components/PhiField";
 import {
-  Upload, Sparkles, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronUp, Info, Loader2, Download
+  Upload, Sparkles, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronUp, Info, Loader2, Download, FileText
 } from "lucide-react";
 
 type ReviewType = "inpatient" | "snf" | "ltac";
@@ -231,13 +231,24 @@ export default function ReviewPage() {
     setResult(null);
     setError(null);
     try {
+      const token = getToken();
+      if (!token) {
+        clearSession();
+        router.push("/login");
+        return;
+      }
       const res = await fetch("/.netlify/functions/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ note, reviewType }),
       });
-      if (!res.ok) throw new Error("Analysis failed. Please try again.");
+      if (res.status === 401) {
+        clearSession();
+        router.push("/login");
+        return;
+      }
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Analysis failed. Please try again.");
       setResult(data);
       setChecklistDone({});
     } catch (err: unknown) {
@@ -533,18 +544,5 @@ export default function ReviewPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-// Needed for FileText import referenced above
-function FileText({ size, className }: { size: number; className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" />
-      <line x1="16" y1="17" x2="8" y2="17" />
-      <polyline points="10 9 9 9 8 9" />
-    </svg>
   );
 }

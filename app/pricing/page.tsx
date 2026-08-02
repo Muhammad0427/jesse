@@ -182,7 +182,7 @@ export default function PricingPage() {
       <section className="bg-blue-700 py-14 text-white text-center">
         <h2 className="text-2xl font-bold mb-3">Not sure which tier fits your team?</h2>
         <p className="text-blue-100 mb-6 max-w-md mx-auto text-sm">
-          Tell us your facility size and review volume and we'll recommend a tier — or scope a pilot.
+          Tell us your facility size and review volume and we&rsquo;ll recommend a tier — or scope a pilot.
         </p>
         <Link
           href="/contact"

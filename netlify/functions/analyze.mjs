@@ -1,11 +1,12 @@
-exports.handler = async (event) => {
+import { verifyToken } from "./_auth.mjs";
+
+export const handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
       body: "",
     };
@@ -13,6 +14,17 @@ exports.handler = async (event) => {
 
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret) {
+    return { statusCode: 500, body: JSON.stringify({ error: "Session secret not configured" }) };
+  }
+
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  if (!verifyToken(token, sessionSecret)) {
+    return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized. Please sign in again." }) };
   }
 
   let note, reviewType;
@@ -70,10 +82,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     };
   } catch (err) {

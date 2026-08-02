@@ -11,49 +11,53 @@ export interface AuthUser {
 export const SESSION_KEY = "um_platform_user";
 export const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 
-const DEMO_USERS: Record<string, { password: string; user: AuthUser }> = {
-  "hospital@demo.com": {
-    password: "demo1234",
-    user: { email: "hospital@demo.com", name: "Sarah Chen, RN CCM", role: "hospital", organization: "Metro General Hospital" },
-  },
-  "carrier@demo.com": {
-    password: "demo1234",
-    user: { email: "carrier@demo.com", name: "James Park, MD", role: "carrier", organization: "BlueCross UM Division" },
-  },
-};
+interface StoredSession {
+  user: AuthUser;
+  token: string;
+  expiresAt: number;
+}
 
 export async function loginWithApi(email: string, password: string): Promise<AuthUser> {
-  await new Promise((r) => setTimeout(r, 600));
-  const match = DEMO_USERS[email.toLowerCase()];
-  if (!match || match.password !== password) {
-    throw new Error("Invalid email or password. Please try again.");
+  const res = await fetch("/.netlify/functions/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "Login failed. Please try again.");
   }
-  saveSession(match.user);
-  return match.user;
+  saveSession(data.user, data.token, data.expiresAt);
+  return data.user;
 }
 
-export function saveSession(user: AuthUser) {
+export function saveSession(user: AuthUser, token: string, expiresAt: number) {
   if (typeof window === "undefined") return;
-  sessionStorage.setItem(
-    SESSION_KEY,
-    JSON.stringify({ user, expiresAt: Date.now() + SESSION_TIMEOUT_MS })
-  );
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user, token, expiresAt }));
 }
 
-export function loadSession(): AuthUser | null {
+function loadStoredSession(): StoredSession | null {
   if (typeof window === "undefined") return null;
   const raw = sessionStorage.getItem(SESSION_KEY);
   if (!raw) return null;
   try {
-    const { user, expiresAt } = JSON.parse(raw);
-    if (Date.now() > expiresAt) {
+    const parsed = JSON.parse(raw) as StoredSession;
+    if (Date.now() > parsed.expiresAt) {
       sessionStorage.removeItem(SESSION_KEY);
       return null;
     }
-    return user as AuthUser;
+    return parsed;
   } catch {
     return null;
   }
+}
+
+export function loadSession(): AuthUser | null {
+  return loadStoredSession()?.user ?? null;
+}
+
+export function getToken(): string | null {
+  return loadStoredSession()?.token ?? null;
 }
 
 export function clearSession() {
@@ -62,13 +66,7 @@ export function clearSession() {
 }
 
 export function getRemainingMs(): number {
-  if (typeof window === "undefined") return 0;
-  const raw = sessionStorage.getItem(SESSION_KEY);
-  if (!raw) return 0;
-  try {
-    const { expiresAt } = JSON.parse(raw);
-    return Math.max(0, expiresAt - Date.now());
-  } catch {
-    return 0;
-  }
+  const session = loadStoredSession();
+  if (!session) return 0;
+  return Math.max(0, session.expiresAt - Date.now());
 }
