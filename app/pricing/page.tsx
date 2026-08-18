@@ -185,10 +185,10 @@ export default function PricingPage() {
           Tell us your facility size and review volume and we&rsquo;ll recommend a tier — or scope a pilot.
         </p>
         <Link
-          href="/contact"
+          href="/get-started"
           className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors"
         >
-          Talk to Us <ArrowRight size={16} />
+          Find My Plan <ArrowRight size={16} />
         </Link>
       </section>
     </>

@@ -72,12 +72,20 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link
-                href="/login"
-                className="ml-4 px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition-colors"
-              >
-                Sign In
-              </Link>
+              <div className="flex items-center gap-3 ml-4">
+                <Link
+                  href="/get-started"
+                  className="px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-lg hover:bg-blue-800 transition-colors"
+                >
+                  Get Started
+                </Link>
+                <Link
+                  href="/login"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-700"
+                >
+                  Sign In
+                </Link>
+              </div>
             )}
           </div>
 
@@ -104,9 +112,14 @@ export default function Navbar() {
               Sign Out
             </button>
           ) : (
-            <Link href="/login" className="block text-sm font-medium text-blue-700">
-              Sign In
-            </Link>
+            <>
+              <Link href="/get-started" className="block text-sm font-semibold text-blue-700" onClick={() => setOpen(false)}>
+                Get Started
+              </Link>
+              <Link href="/login" className="block text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>
+                Sign In
+              </Link>
+            </>
           )}
         </div>
       )}
