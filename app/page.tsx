@@ -44,12 +44,16 @@ const features = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero with video background */}
+      {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-slate-900">
-        {/* Video overlay background — replace src with real hospital footage */}
         <div className="absolute inset-0 z-0">
           <div className="w-full h-full bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
-          {/* Decorative grid overlay */}
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.35), transparent 70%)",
+            }}
+          />
           <div
             className="absolute inset-0 opacity-10"
             style={{
@@ -59,18 +63,6 @@ export default function HomePage() {
             }}
           />
         </div>
-
-        {/* Video element — uses a free Pexels/stock hospital ambiance video; swap src for production */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover z-0 opacity-25"
-          src="https://www.w3schools.com/html/mov_bbb.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-slate-900/70 z-10" />
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <div className="inline-flex items-center gap-2 bg-blue-900/50 border border-blue-700/50 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">

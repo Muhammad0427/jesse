@@ -20,6 +20,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+The Netlify functions in `netlify/functions/` require these to be set (in the Netlify dashboard, or a local `.env` for `netlify dev`):
+
+- `SESSION_SECRET` — random secret used to sign login session tokens. Generate one with `openssl rand -hex 32`.
+- `ANTHROPIC_API_KEY` — used by `netlify/functions/analyze.js` to call the Claude API for review generation.
+
+Without `SESSION_SECRET`, `/login` and `/analyze` both return `500`. Without `ANTHROPIC_API_KEY`, `/analyze` returns `500`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
