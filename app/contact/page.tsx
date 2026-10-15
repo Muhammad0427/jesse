@@ -57,8 +57,7 @@ export default function ContactPage() {
                   <Mail className="text-blue-600 mt-0.5 flex-shrink-0" size={16} />
                   <div>
                     <div className="font-medium text-slate-800">Email</div>
-                    <div>info@clearpathum.com</div>
-                    <div>support@clearpathum.com</div>
+                    <div>admin@medreview24.com</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 text-sm text-slate-600">
@@ -184,7 +183,7 @@ export default function ContactPage() {
                   {loading ? "Sending…" : "Send Message"}
                 </button>
                 <p className="text-xs text-slate-400 text-center">
-                  We typically respond within one business day. For urgent support, email support@clearpathum.com directly.
+                  We typically respond within one business day. For urgent support, email admin@medreview24.com directly.
                 </p>
               </form>
             )}
